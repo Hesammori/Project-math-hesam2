@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ماجرای مساحت در سرزمین چندضلعی‌ها | حسام الدین مریدی | ریاضی هفتم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2b3b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .video-section {
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #1e1e2f, #2a2a3e);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .scene-indicator {
+            color: white;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .quiz-section {
+            padding: 25px;
+            background: #f8f9ff;
+            border-top: 4px solid #6a11cb;
+        }
+
+        .quiz-title {
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .option-btn {
+            flex: 1;
+            min-width: 120px;
+            background: #f0f2f5;
+            border: 2px solid #ddd;
+            border-radius: 60px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            text-align: center;
+        }
+
+        .option-correct {
+            background: #22c55e !important;
+            color: white;
+        }
+
+        .option-wrong {
+            background: #ef4444 !important;
+            color: white;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .result-area {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb20, #2575fc20);
+            border-radius: 24px;
+            margin-top: 20px;
+        }
+
+        .final-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6a11cb;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: inherit;
+        }
+
+        .footer {
+            background: #1e1e2f;
+            color: #888;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .option-btn {
+                min-width: 100%;
+            }
+            .quiz-question {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 ماجرای مساحت در سرزمین چندضلعی‌ها 📏</h1>
+            <p>✨ یک ماجراجویی ریاضی با مهتا ✨</p>
+            <div style="margin-top: 12px; font-size: 0.8rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px;">
+                👨‍💻 سازنده: حسام الدین مریدی | 👨‍🏫 استاد درس: راشد محمد رضایی
+            </div>
+        </div>
+
+        <div class="video-section">
+            <video id="storyVideo" controls>
+                <source id="videoSource" src="" type="video/mp4">
+            </video>
+            <div class="video-controls">
+                <button class="nav-btn" id="prevBtn">◀ صحنه قبل</button>
+                <span class="scene-indicator" id="sceneIndicator">صحنه 1 از 8</span>
+                <button class="nav-btn" id="nextBtn">صحنه بعد ▶</button>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h2 class="quiz-title">🎮 چالش مساحت 🎮</h2>
+            <p style="text-align: center; margin-bottom: 20px;">به سوالات پاسخ بده و امتیاز بگیر!</p>
+
+            <div class="quiz-card">
+                <div class="quiz-question">🟪 سوال 1: یک مربع به ضلع ۷ سانتی‌متر، مساحت آن چند است؟</div>
+                <div class="options">
+                    <button class="option-btn" data-q="1" data-answer="49">الف) ۴۹ سانتی‌متر مربع</button>
+                    <button class="option-btn" data-q="1" data-answer="28">ب) ۲۸ سانتی‌متر مربع</button>
+                    <button class="option-btn" data-q="1" data-answer="14">ج) ۱۴ سانتی‌متر مربع</button>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-question">🔺 سوال 2: مساحت مثلثی به قاعده ۱۰ و ارتفاع ۶ چقدر است؟</div>
+                <div class="options">
+                    <button class="option-btn" data-q="2" data-answer="60">الف) ۶۰</button>
+                    <button class="option-btn" data-q="2" data-answer="30">ب) ۳۰</button>
+                    <button class="option-btn" data-q="2" data-answer="16">ج) ۱۶</button>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-question">🟧 سوال 3: یک مستطیل به طول ۱۲ و عرض ۵، مساحت آن کدام است؟</div>
+                <div class="options">
+                    <button class="option-btn" data-q="3" data-answer="17">الف) ۱۷</button>
+                    <button class="option-btn" data-q="3" data-answer="34">ب) ۳۴</button>
+                    <button class="option-btn" data-q="3" data-answer="60">ج) ۶۰</button>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <div class="result-area">
+                <div class="final-score" id="finalScore">امتیاز: 0 از 3</div>
+                <div id="finalMessage"></div>
+                <button class="restart-btn" id="restartQuizBtn">🔄 تلاش دوباره</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            🧮 پروژه ریاضی هفتم - ماجرای مساحت در سرزمین چندضلعی‌ها 🧮
+            <br>
+            <span style="font-size: 0.7rem;">ساخته شده توسط: حسام الدین مریدی | زیر نظر استاد راشد محمد رضایی</span>
+        </div>
+    </div>
+
+    <script>
+        // ==================== ویدیوها ====================
+        const videos = [
+            "scene1.mp4",
+        ];
+        
+        let currentScene = 0;
+        const video = document.getElementById('storyVideo');
+        const videoSource = document.getElementById('videoSource');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const sceneIndicator = document.getElementById('sceneIndicator');
+
+        function loadScene(index) {
+            if (index >= 0 && index < videos.length) {
+                currentScene = index;
+                videoSource.src = videos[currentScene];
+                video.load();
+                video.play().catch(e => console.log(e));
+                sceneIndicator.textContent = `صحنه ${currentScene + 1} از ${videos.length}`;
+            }
+        }
+
+        prevBtn.onclick = () => { if (currentScene > 0) loadScene(currentScene - 1); };
+        nextBtn.onclick = () => { if (currentScene < videos.length - 1) loadScene(currentScene + 1); };
+
+        if (videos[0]) loadScene(0);
+
+        // ==================== سوالات ====================
+        let userAnswers = {1: null, 2: null, 3: null};
+        const correctAnswers = {1: 49, 2: 30, 3: 60};
+
+        function updateScore() {
+            let correct = 0;
+            for (let i = 1; i <= 3; i++) {
+                if (userAnswers[i] === correctAnswers[i]) correct++;
+            }
+            document.getElementById('finalScore').textContent = `امتیاز: ${correct} از 3`;
+            
+            const msgDiv = document.getElementById('finalMessage');
+            if (correct === 3) msgDiv.innerHTML = '<p style="color:#22c55e;">🎉 عالی! تو یک قهرمان هندسه‌ای! 🎉</p>';
+            else if (correct === 2) msgDiv.innerHTML = '<p style="color:#f59e0b;">👍 خوب بود! فقط یک فرمول را مرور کن.</p>';
+            else msgDiv.innerHTML = '<p style="color:#ef4444;">💪 اشکال نداره! یک بار دیگه انیمیشن رو ببین.</p>';
+        }
+
+        function handleAnswer(qId, answer) {
+            if (userAnswers[qId] !== null) return;
+            userAnswers[qId] = answer;
+            
+            const buttons = document.querySelectorAll(`.option-btn[data-q="${qId}"]`);
+            const feedback = document.getElementById(`feedback${qId}`);
+            
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (parseInt(btn.dataset.answer) === correctAnswers[qId]) {
+                    btn.classList.add('option-correct');
+                }
+                if (parseInt(btn.dataset.answer) === answer && answer !== correctAnswers[qId]) {
+                    btn.classList.add('option-wrong');
+                }
+            });
+            
+            if (answer === correctAnswers[qId]) {
+                feedback.innerHTML = '<span style="color:#15803d;">✅ درست! آفرین!</span>';
+                feedback.style.background = '#dcfce7';
+            } else {
+                const texts = {1: "۴۹ (چون ۷×۷=۴۹)", 2: "۳۰ (چون ۱۰×۶÷۲=۳۰)", 3: "۶۰ (چون ۱۲×۵=۶۰)"};
+                feedback.innerHTML = `<span style="color:#b91c1c;">❌ پاسخ صحیح: ${texts[qId]}</span>`;
+                feedback.style.background = '#fee2e2';
+            }
+            updateScore();
+        }
+
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.onclick = () => handleAnswer(parseInt(btn.dataset.q), parseInt(btn.dataset.answer));
+        });
+
+        document.getElementById('restartQuizBtn').onclick = () => {
+            userAnswers = {1: null, 2: null, 3: null};
+            for (let i = 1; i <= 3; i++) {
+                document.querySelectorAll(`.option-btn[data-q="${i}"]`).forEach(btn => {
+                    btn.disabled = false;
+                    btn.classList.remove('option-correct', 'option-wrong');
+                });
+                const fb = document.getElementById(`feedback${i}`);
+                fb.innerHTML = '';
+                fb.style.background = 'transparent';
+            }
+            updateScore();
+        };
+        
+        updateScore();
+    </script>
+</body>
+</html>
